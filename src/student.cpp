@@ -67,6 +67,12 @@ using namespace std;
 //     preorder(&satu);      // mencetak:  42
 // =============================================================================
 void preorder(const Node* root) {
+    if(root == nullptr){
+        return;
+    }
+    cout << root->data << " ";   // untuk print
+    preorder(root->left);        // untuk geser ke kiri
+    preorder(root->right);       // untuk geser ke kanan
 }
 
 // =============================================================================
@@ -90,6 +96,12 @@ void preorder(const Node* root) {
 //     inorder(NULL);     // tidak mencetak apa pun
 // =============================================================================
 void inorder(const Node* root) {
+    if(root == nullptr){
+        return;
+    }
+    inorder(root->left);        // untuk geser ke kiri
+    cout << root->data << " ";  // untuk print
+    inorder(root->right);       // untuk geser ke kanan
 }
 
 // =============================================================================
@@ -114,6 +126,12 @@ void inorder(const Node* root) {
 //     postorder(NULL);   // tidak mencetak apa pun
 // =============================================================================
 void postorder(const Node* root) {
+    if(root == nullptr){
+        return;
+    }
+    postorder(root->left);        // untuk geser ke kiri
+    postorder(root->right);       // untuk geser ke kanan
+    cout << root->data << " ";    // untuk print
 }
 
 // =============================================================================
@@ -140,6 +158,13 @@ void postorder(const Node* root) {
 //     clear(root);              // aman, tidak terjadi apa-apa
 // =============================================================================
 void clear(Node*& root) {
+    if(root == nullptr){
+        return;
+    }
+    clear(root->left);
+    clear(root->right);
+    delete root;
+    root = nullptr;
 }
 
 // =============================================================================
@@ -177,7 +202,13 @@ void clear(Node*& root) {
 //     3                           masih punya satu cabang)
 // =============================================================================
 int jumlahDaun(const Node* root) {
-    return 0;
+    if(root == nullptr){
+        return 0;
+    }
+    if(root->left == nullptr && root->right == nullptr){
+        return 1;
+    }
+    return jumlahDaun(root->left) + jumlahDaun(root->right);
 }
 
 // =============================================================================
@@ -301,6 +332,7 @@ int main() {
     cout << "      preorder    : 50 80 10 70 30 20 90\n";
     cout << "      inorder     : 10 80 30 70 50 20 90\n";
     cout << "      postorder   : 10 30 70 80 90 20 50\n";
+
 
     // -------------------------------------------------------------------------
     // Soal 3 — menghitung jumlah daun.
